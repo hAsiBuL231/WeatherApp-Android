@@ -2,6 +2,7 @@ package com.example.weatherapp.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.weatherapp.R;
 import com.example.weatherapp.adapters.HourlyAdapter;
 import com.example.weatherapp.entities.Hourly;
+import com.example.weatherapp.location.LocationCord;
 import com.example.weatherapp.update.UpdateUI;
 import com.example.weatherapp.url.URL;
 
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private HourlyAdapter hourlyAdapter;
     private RecyclerView recyclerViewHourly;
 
-    private TextView textNameCity, textNext5Days, textDateTime, textState, textTemperature;
+    private TextView textNameCity, textNext5Days, textSeeMap, textDateTime, textState, textTemperature;
     private TextView textPercentHumidity, textWindSpeed, textFeelsLike;
     private ImageView imgIconWeather, imgSearch;
     private EditText editTextSearch;
@@ -72,14 +74,27 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewHourly.setAdapter(hourlyAdapter);
 
         textNext5Days.setOnClickListener(v -> setIntentExtras());
-        textNameCity.setText("Hanoi");
+        textSeeMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + nameCity + "&appid=e5afb6abedc33f32a139cf17a8921af6" + "&units=metric";
+                String url2 = "https://maps.openweathermap.org/maps/2.0/weather/1h/TA2/1/98.2/98.2/?appid=";
+                String locationURL = "https://zoom.earth/places/bangladesh/"+nameCity;
+                String tempURL = "https://zoom.earth/maps/temperature/";
+                String tempURL2 = "https://map.worldweatheronline.com/temperature";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(tempURL));
+                startActivity(intent);
+            }
+        });
+        textNameCity.setText("Australia");
         textNameCity.setVisibility(View.VISIBLE);
-        getCurrentWeatherData("Hanoi");
-        getHourlyData("Hanoi");
+        getCurrentWeatherData("Australia");
+        getHourlyData("Australia");
         imgSearch.setOnClickListener(v -> {
             String city = editTextSearch.getText().toString();
             if (city.isEmpty()) {
-                Toast.makeText(this, "Please enter city", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter city name", Toast.LENGTH_SHORT).show();
             } else {
                 nameCity = city;
                 textNameCity.setText(nameCity);
@@ -93,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
     private void setMapping() {
         recyclerViewHourly = findViewById(R.id.recyclerViewHourly);
         textNext5Days = findViewById(R.id.textNext5Days);
+        textSeeMap = findViewById(R.id.textSeeMap);
         textDateTime = findViewById(R.id.textDateTime);
         editTextSearch = findViewById(R.id.editTextSearch);
         textState = findViewById(R.id.textState);
@@ -171,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = jsonObject.getJSONArray("list");
                         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
-                        SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+                        SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                         String todayDate = dateFormat.format(new Date());
                         for (int i = 0; i < jsonArray.length(); i++) {

@@ -79,7 +79,7 @@ public class FutureActivity extends AppCompatActivity {
         }
         Log.d("result", "Du lieu qua: " + city);
         if (city.isEmpty()) {
-            nameCity = "Hanoi";
+            nameCity = "Dhaka";
             get5DaysData(nameCity);
         } else {
             nameCity = city;

@@ -34,12 +34,13 @@
                     android:drawableStart="@drawable/ic_search"
                     android:drawablePadding="10dp"
                     android:hint="@string/search_city"
+                    android:textColorHint="@color/textColor"
                     android:imeOptions="actionDone"
                     android:importantForAutofill="no"
                     android:includeFontPadding="false"
                     android:inputType="text"
                     android:paddingStart="16dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textColor"
                     tools:ignore="RtlSymmetry" />
 
                 <ImageView
@@ -103,18 +104,43 @@
 
             <include layout="@layout/layout_weather_card" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHourly"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:clipToPadding="false"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="24dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:includeFontPadding="false"-->
+<!--                    android:text="@string/today"-->
+<!--                    android:textColor="@color/textColor"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    tools:ignore="InefficientWeight" />-->
+
                 <TextView
+                    android:id="@+id/textSeeMap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_weight="1"
                     android:includeFontPadding="false"
-                    android:text="@string/today"
+                    android:text="@string/see_map"
                     android:textColor="@color/textColor"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -127,18 +153,11 @@
                     android:layout_marginEnd="24dp"
                     android:text="@string/next_5_days"
                     android:textColor="@color/textColor"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:ignore="InefficientWeight" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHourly"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:clipToPadding="false"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp" />
         </LinearLayout>
     </ScrollView>
 
