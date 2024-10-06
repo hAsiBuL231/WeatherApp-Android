@@ -77,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
         textSeeMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + nameCity + "&appid=e5afb6abedc33f32a139cf17a8921af6" + "&units=metric";
-                String url2 = "https://maps.openweathermap.org/maps/2.0/weather/1h/TA2/1/98.2/98.2/?appid=";
-                String locationURL = "https://zoom.earth/places/bangladesh/"+nameCity;
                 String tempURL = "https://zoom.earth/maps/temperature/";
                 String tempURL2 = "https://map.worldweatheronline.com/temperature";
                 Intent intent = new Intent(Intent.ACTION_VIEW);
